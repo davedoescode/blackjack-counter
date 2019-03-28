@@ -36,28 +36,21 @@ def displayTable(dealer, players):
     else:
       dealerCards += (card + ', ')
 
-  print('\t\t\t\t\tDealer\n\t\t\t\t\t' + dealerCards + '\n\t\t\t\t\t' + countPlayerTotal(dealer) + '\n')
+  print('---------------')
+  print('Dealer:\n' + dealerCards + '\n--> ' + countPlayerTotal(dealer) + ' <--')
+  print('---------------')
 
-  playerTitles = ''
-  playerHands = ''
-  playersCardTotal = ''
   for player in players:
-    playerTitles += (player[0] + '\t\t')
+    print(player[0] + ':')
     playerCards = ''
     for card in player[1]:
       if player[1].index(card) == (len(player[1])-1):
-        playerCards += (card + '\t\t')
+        playerCards += (card)
       else:
         playerCards += (card + ', ')
-
-    playerHands += (playerCards)
-
-    playerCardTotal = countPlayerTotal(player[1])
-    playersCardTotal += (countPlayerTotal(player[1]) + '\t\t')
-  
-  print(playerTitles)
-  print(playerHands)
-  print(playersCardTotal + '\n')
+    print(playerCards)
+    print('--> ' + countPlayerTotal(player[1]) + ' <--')
+    print('---------------')
 
 def countPlayerTotal(playerHand):
   #TODO: IMPROVE LOGIC IF THE CARD IS AN ACE, MAY BE IN A DIFFERENT FUNCTION
@@ -82,7 +75,6 @@ def countPlayerTotal(playerHand):
     return str(cardTotal)
 
 def getPlayerAction():
-  clear_screen()
   playerPrompt = 'enter one of the following options...\n\thit (h)\n\tstay (s)\nplayer selection: '
   playerAction = input(playerPrompt)
   clear_screen()
@@ -103,6 +95,15 @@ def dealFirstHand(cards, dealer, players):
 
   for player in players:
     player[1].append(cards.pop())
+
+def hitAction(cards, playerHand):
+  playerHand.append(cards.pop())
+
+def basicNpcLogic(cards, playerHand):
+  if int(countPlayerTotal(playerHand)) >= 17:
+    pass
+  else:
+    playerHand.append(cards.pop())
 
 def clear_screen():
 	_ = os.system("clear")
