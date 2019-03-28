@@ -29,11 +29,18 @@ def getPlayerPosition():
     getPlayerPosition()
 
 def displayTable(dealer, players):
-  print('\t\t\t\t\tDealer\n\t\t\t\t\t' + dealer[0] + '\n\t\t\t\t\t21\n')
+  dealerCards = ''
+  for card in dealer:
+    if dealer.index(card) == (len(dealer)-1):
+      dealerCards += card
+    else:
+      dealerCards += (card + ', ')
+
+  print('\t\t\t\t\tDealer\n\t\t\t\t\t' + dealerCards + '\n\t\t\t\t\t' + countPlayerTotal(dealer) + '\n')
 
   playerTitles = ''
   playerHands = ''
-  playerCardTotal = ''
+  playersCardTotal = ''
   for player in players:
     playerTitles += (player[0] + '\t\t')
     playerCards = ''
@@ -44,11 +51,32 @@ def displayTable(dealer, players):
         playerCards += (card + ', ')
 
     playerHands += (playerCards)
-    playerCardTotal += '21\t\t'
+
+    playerCardTotal = countPlayerTotal(player[1])
+    playersCardTotal += (countPlayerTotal(player[1]) + '\t\t')
   
   print(playerTitles)
   print(playerHands)
-  print(playerCardTotal + '\n')
+  print(playersCardTotal + '\n')
+
+def countPlayerTotal(playerHand):
+  #TODO: IMPROVE LOGIC IF THE CARD IS AN ACE, MAY BE IN A DIFFERENT FUNCTION
+  cardTotal = 0
+  for card in playerHand:
+    if card[0] in ['J', 'Q', 'K'] or len(card) == 3:
+      cardTotal += 10
+
+    elif card[0] == 'A':
+      if (cardTotal + 11) > 21:
+        cardTotal += 1
+
+      else:
+        cardTotal += 11
+
+    else:
+      cardTotal += int(card[0])
+  
+  return str(cardTotal)
 
 def getPlayerAction():
   clear_screen()
