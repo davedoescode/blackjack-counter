@@ -1,19 +1,25 @@
-import cards
+import cards, table
 import gameFunctions as gf
 
 def main():
   gf.clear_screen()
+  playGame()
 
+def playGame():
+  continueGame = True
+
+  gameTable = table.Table()
+  playerPosition = gf.getPlayerPosition()
+  gameTable.setPlayerPosition(playerPosition)
+  gameTable.fillTablePositions()
+  
   gameDeck = cards.GameDeck()
   gameDeck.shuffleDeck()
 
-  game()
-
-def game():
-  continueGame = True
-
   while continueGame == True:
-    userAction = gf.getUserAction()
+    print(gameTable.playerHands)
+    # playerAction = gf.getPlayerAction()
+    # continueGame = False
     continueGame = False
   
   input('press enter to end game.')
