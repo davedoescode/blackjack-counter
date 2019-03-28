@@ -9,9 +9,9 @@ def dealCard(cardDeck):
 def getPlayerPosition():
   clear_screen()
   playerPrompt = 'what seat in the range [1, 6] do you want to play at: '
-  playerPosition = input(playerPrompt)
+
   try:
-    playerPosition = int(playerPosition) - 1
+    playerPosition = int(input(playerPrompt)) - 1
   except:
     print('invalid postion selection, try again ...')
     time.sleep(1.25)
@@ -40,6 +40,15 @@ def getPlayerAction():
     getPlayerAction()
 
   return playerAction
+
+def dealFirstHand(cards, dealer, players):
+  for player in players:
+    player[1].append(cards.pop())
+  
+  dealer.append(cards.pop())
+
+  for player in players:
+    player[1].append(cards.pop())
 
 def clear_screen():
 	_ = os.system("clear")

@@ -17,7 +17,10 @@ def playGame():
   gameDeck.shuffleDeck()
 
   while continueGame == True:
+    gf.dealFirstHand(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
     print(gameTable.playerHands)
+    print(gameTable.dealer)
+    print(len(gameDeck.deck))
     # playerAction = gf.getPlayerAction()
     # continueGame = False
     continueGame = False
