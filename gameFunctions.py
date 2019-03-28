@@ -76,7 +76,10 @@ def countPlayerTotal(playerHand):
     else:
       cardTotal += int(card[0])
   
-  return str(cardTotal)
+  if cardTotal > 21:
+    return 'BUST'
+  else:
+    return str(cardTotal)
 
 def getPlayerAction():
   clear_screen()

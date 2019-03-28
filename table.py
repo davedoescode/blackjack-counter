@@ -4,7 +4,7 @@ class Table():
     self.dealer = []
 
   def setPlayerPosition(self, position):
-    self.playerHands[position].append('player')
+    self.playerHands[position].append('[ PLAYER ]')
     self.playerHands[position].append([])
 
   def fillTablePositions(self):
