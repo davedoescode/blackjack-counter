@@ -16,7 +16,7 @@ standardDeck = [
   'Ka', 'Ks', 'Kh', 'Kd'
   ] * 6
 
-class gameDeck:
+class GameDeck:
   def __init__(self):
     self.deck = standardDeck
 
