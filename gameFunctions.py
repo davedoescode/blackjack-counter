@@ -105,6 +105,10 @@ def basicNpcLogic(cards, playerHand):
   else:
     playerHand.append(cards.pop())
 
+def endThePlay():
+  inputString = 'press enter to end the play, and begin the dealers play.'
+  input(inputString)
+
 def clear_screen():
 	_ = os.system("clear")
 

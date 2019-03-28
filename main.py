@@ -19,6 +19,8 @@ def playGame():
   while continueGame == True:
     theDeal(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
     thePlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
+    gf.endThePlay()
+    dealersPlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
     continueGame = False
   
   input('press enter to end game.')
@@ -42,6 +44,12 @@ def thePlay(deck, dealer, players):
       gf.basicNpcLogic(deck, player[1])
 
   gf.displayTable(dealer, players)
+
+def dealersPlay(deck, dealer, players):
+  gf.clear_screen()
+  gf.basicNpcLogic(deck, dealer)
+  gf.displayTable(dealer, players)
+  print(len(deck))
 
 if __name__ == '__main__':
   main()
