@@ -18,9 +18,7 @@ def playGame():
 
   while continueGame == True:
     gf.dealFirstHand(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
-    print(gameTable.playerHands)
-    print(gameTable.dealer)
-    print(len(gameDeck.deck))
+    gf.displayTable(gameTable.dealer, gameTable.playerHands)
     # playerAction = gf.getPlayerAction()
     # continueGame = False
     continueGame = False
