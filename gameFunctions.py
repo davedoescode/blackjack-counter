@@ -115,7 +115,7 @@ def theDeal(deck, dealer, players):
 
 def thePlay(deck, dealer, players):
   for player in players:
-    if player[0] == '[ PLAYER ]':
+    if player[0] == 'PLAYER':
 
       isPlayersTurn = True
       while isPlayersTurn:

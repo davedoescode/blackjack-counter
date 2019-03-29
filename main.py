@@ -8,19 +8,23 @@ def main():
 def playGame():
   continueGame = True
 
+  gameDeck = cards.GameDeck()
+  gameDeck.shuffleDeck()
+
   gameTable = table.Table()
   playerPosition = gf.getPlayerPosition()
   gameTable.setPlayerPosition(playerPosition)
   gameTable.fillTablePositions()
-  
-  gameDeck = cards.GameDeck()
-  gameDeck.shuffleDeck()
 
   while continueGame == True:
+    print(gameTable.playerHands)
     gf.theDeal(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
+
     gf.thePlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
     gf.endThePlay()
+
     gf.dealersPlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
+
     continueGame = False
   
   input('press enter to view hand results.')
