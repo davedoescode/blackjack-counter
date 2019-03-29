@@ -29,6 +29,7 @@ def getPlayerPosition():
     getPlayerPosition()
 
 def displayTable(dealer, players):
+  clear_screen()
   dealerCards = ''
   for card in dealer:
     if dealer.index(card) == (len(dealer)-1):
@@ -100,10 +101,13 @@ def hitAction(cards, playerHand):
   playerHand.append(cards.pop())
 
 def basicNpcLogic(cards, playerHand):
-  if int(countPlayerTotal(playerHand)) >= 17:
-    pass
+  if countPlayerTotal(playerHand) == 'BUST':
+    return False
+  elif int(countPlayerTotal(playerHand)) >= 17:
+    return False
   else:
     playerHand.append(cards.pop())
+    return True
 
 def endThePlay():
   inputString = 'press enter to end the play, and begin the dealers play.'

@@ -34,22 +34,39 @@ def theDeal(deck, dealer, players):
 def thePlay(deck, dealer, players):
   for player in players:
     if player[0] == '[ PLAYER ]':
-      playerAction = gf.getPlayerAction()
 
-      if playerAction.upper() == 'H':
-        gf.hitAction(deck, player[1])
-        # gf.displayTable(gameTable.dealer, gameTable.playerHands)
+      isPlayersTurn = True
+      while isPlayersTurn:
+
+        playerCount = gf.countPlayerTotal(player[1])
+        if playerCount == 'BUST':
+          isPlayersTurn = False
+          break
+
+        playerAction = gf.getPlayerAction()
+        if playerAction.upper() == 'H':
+          gf.hitAction(deck, player[1])
+        elif playerAction.upper() == 'S':
+          isPlayersTurn = False
+        gf.displayTable(dealer, players)
 
     else:
-      gf.basicNpcLogic(deck, player[1])
+      isPlayersTurn = True
+
+      while isPlayersTurn:
+        isPlayersTurn = gf.basicNpcLogic(deck, player[1])
+      gf.displayTable(dealer, players)
 
   gf.displayTable(dealer, players)
 
 def dealersPlay(deck, dealer, players):
   gf.clear_screen()
-  gf.basicNpcLogic(deck, dealer)
+
+  isDealersTurn = True
+  while isDealersTurn:
+    isDealersTurn = gf.basicNpcLogic(deck, dealer)
+
   gf.displayTable(dealer, players)
-  print(len(deck))
 
 if __name__ == '__main__':
   main()
