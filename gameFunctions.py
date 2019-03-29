@@ -120,12 +120,12 @@ def thePlay(deck, dealer, players):
       isPlayersTurn = True
       while isPlayersTurn:
 
-        playerCount = gf.countPlayerTotal(player[1])
+        playerCount = countPlayerTotal(player[1])
         if playerCount == 'BUST':
           isPlayersTurn = False
           break
 
-        playerAction = gf.getPlayerAction()
+        playerAction = getPlayerAction()
         if playerAction.upper() == 'H':
           hitAction(deck, player[1])
         elif playerAction.upper() == 'S':
@@ -136,17 +136,17 @@ def thePlay(deck, dealer, players):
       isPlayersTurn = True
 
       while isPlayersTurn:
-        isPlayersTurn = gf.basicNpcLogic(deck, player[1])
+        isPlayersTurn = basicNpcLogic(deck, player[1])
       displayTable(dealer, players)
 
   displayTable(dealer, players)
 
 def dealersPlay(deck, dealer, players):
-  gf.clear_screen()
+  clear_screen()
 
   isDealersTurn = True
   while isDealersTurn:
-    isDealersTurn = gf.basicNpcLogic(deck, dealer)
+    isDealersTurn = basicNpcLogic(deck, dealer)
 
   displayTable(dealer, players)
 
