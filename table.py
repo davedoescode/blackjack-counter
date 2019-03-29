@@ -18,4 +18,5 @@ class Table():
 
   def clearTable(self):
     self.dealer = []
-    self.playerHands = [[], [], [], [], [], []]
+    for player in self.playerHands:
+      player[1] = []

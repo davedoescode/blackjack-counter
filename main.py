@@ -6,32 +6,30 @@ def main():
   playGame()
 
 def playGame():
-  continueGame = True
-
   gameDeck = cards.GameDeck()
   gameDeck.shuffleDeck()
+  gameDeck.dealerCut()
 
   gameTable = table.Table()
   playerPosition = gf.getPlayerPosition()
   gameTable.setPlayerPosition(playerPosition)
   gameTable.fillTablePositions()
 
-  while continueGame == True:
+  while gameDeck.continueGame == True:
     print(gameTable.playerHands)
-    gf.theDeal(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
+    gf.theDeal(gameDeck, gameTable.dealer, gameTable.playerHands)
 
-    gf.thePlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
+    gf.thePlay(gameDeck, gameTable.dealer, gameTable.playerHands)
     gf.endThePlay()
 
-    gf.dealersPlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
+    gf.dealersPlay(gameDeck, gameTable.dealer, gameTable.playerHands)
 
-    continueGame = False
+    gameTable.clearTable()
+    print(gameDeck.continueGame)
   
   input('press enter to view hand results.')
   gf.displayHandResults(gameTable.dealer, gameTable.playerHands)
   input('press enter to end game.')
-  gameTable.clearTable()
-  gameDeck.resetDeck()
   gf.clear_screen()
   gf.exit()
 

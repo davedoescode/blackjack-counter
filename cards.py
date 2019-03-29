@@ -1,4 +1,5 @@
 import random
+import gameFunctions as gf
 
 standardDeck = [
   'Aa', 'As', 'Ah', 'Ad',
@@ -19,6 +20,7 @@ standardDeck = [
 class GameDeck:
   def __init__(self):
     self.deck = standardDeck
+    self.continueGame = True
 
   def shuffleDeck(self):
     random.shuffle(self.deck)
@@ -28,8 +30,20 @@ class GameDeck:
     random.shuffle(self.deck)
     random.shuffle(self.deck)
 
+  def dealerCut(self):
+    # cutPosition = random.randrange(0, len(self.deck)/2)
+    self.deck.insert(78, 'CUT')
+
   def dealCard(self):
+    self.isEndOfDeck()
     return self.deck.pop()
+
+  def isEndOfDeck(self):
+    if self.deck[-1] == 'CUT':
+      self.deck.pop()
+      self.continueGame = False
+    else:
+      self.continueGame = True
 
   def resetDeck(self):
     self.deck = standardDeck

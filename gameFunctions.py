@@ -1,11 +1,5 @@
 import time, os
 
-def initialDeal(cardDeck):
-  pass
-
-def dealCard(cardDeck):
-  pass
-
 def getPlayerPosition():
   clear_screen()
   playerPrompt = 'what seat in the range [1, 6] do you want to play at: '
@@ -90,15 +84,15 @@ def getPlayerAction():
 
 def dealFirstHand(cards, dealer, players):
   for player in players:
-    player[1].append(cards.pop())
+    player[1].append(cards.dealCard())
   
-  dealer.append(cards.pop())
+  dealer.append(cards.dealCard())
 
   for player in players:
-    player[1].append(cards.pop())
+    player[1].append(cards.dealCard())
 
 def hitAction(cards, playerHand):
-  playerHand.append(cards.pop())
+  playerHand.append(cards.dealCard())
 
 def basicNpcLogic(cards, playerHand):
   if countPlayerTotal(playerHand) == 'BUST':
@@ -106,7 +100,7 @@ def basicNpcLogic(cards, playerHand):
   elif int(countPlayerTotal(playerHand)) >= 17:
     return False
   else:
-    playerHand.append(cards.pop())
+    playerHand.append(cards.dealCard())
     return True
 
 def theDeal(deck, dealer, players):
@@ -189,6 +183,15 @@ def determineResults(dealer, players):
       results.append(2)
 
   return results
+
+def isEndOfDeck(deck):
+  continueGame = True
+  if deck[-1] == 'CUT':
+    deck.pop()
+    continueGame = False
+  else:
+    continueGame = True
+  return continueGame
 
 def clear_screen():
 	_ = os.system("clear")
