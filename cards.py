@@ -35,15 +35,14 @@ class GameDeck:
     self.deck.insert(78, 'CUT')
 
   def dealCard(self):
-    self.isEndOfDeck()
+    if self.isEndOfDeck():
+      self.continueGame = False
     return self.deck.pop()
 
   def isEndOfDeck(self):
     if self.deck[-1] == 'CUT':
       self.deck.pop()
-      self.continueGame = False
-    else:
-      self.continueGame = True
+      return True
 
   def resetDeck(self):
     self.deck = standardDeck
