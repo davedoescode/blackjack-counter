@@ -23,6 +23,8 @@ def playGame():
     dealersPlay(gameDeck.deck, gameTable.dealer, gameTable.playerHands)
     continueGame = False
   
+  input('press enter to view hand results.')
+  displayHandResults(gameTable.dealer, gameTable.playerHands)
   input('press enter to end game.')
   gf.clear_screen()
   gf.exit()
@@ -67,6 +69,22 @@ def dealersPlay(deck, dealer, players):
     isDealersTurn = gf.basicNpcLogic(deck, dealer)
 
   gf.displayTable(dealer, players)
+
+def displayHandResults(dealer, players):
+  gf.clear_screen()
+  results = gf.determineResults(dealer, players)
+  
+  i = 0
+  for player in players:
+    if results[i] == 0:
+      print(str(i + 1) + ') ' + player[0] + '--> LOSS')
+      i += 1
+    elif results[i] == 1:
+      print(str(i + 1) + ') ' + player[0] + '--> WIN')
+      i += 1
+    elif results[i] == 2:
+      print(str(i + 1) + ') ' + player[0] + '--> PUSH')
+      i += 1
 
 if __name__ == '__main__':
   main()

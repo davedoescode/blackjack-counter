@@ -113,6 +113,26 @@ def endThePlay():
   inputString = 'press enter to end the play, and begin the dealers play.'
   input(inputString)
 
+def determineResults(dealer, players):
+  dealerScore = countPlayerTotal(dealer)
+  playerScores = []
+  results = []
+
+  for player in players:
+    playerScores.append(countPlayerTotal(player[1]))
+
+  for score in playerScores:
+    if score == 'BUST':
+      results.append(0)
+    elif score < dealerScore:
+      results.append(0)
+    elif score > dealerScore:
+      results.append(1)
+    elif score == dealerScore:
+      results.append(2)
+
+  return results
+
 def clear_screen():
 	_ = os.system("clear")
 
