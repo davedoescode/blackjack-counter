@@ -109,6 +109,63 @@ def basicNpcLogic(cards, playerHand):
     playerHand.append(cards.pop())
     return True
 
+def theDeal(deck, dealer, players):
+  dealFirstHand(deck, dealer, players)
+  displayTable(dealer, players)
+
+def thePlay(deck, dealer, players):
+  for player in players:
+    if player[0] == '[ PLAYER ]':
+
+      isPlayersTurn = True
+      while isPlayersTurn:
+
+        playerCount = gf.countPlayerTotal(player[1])
+        if playerCount == 'BUST':
+          isPlayersTurn = False
+          break
+
+        playerAction = gf.getPlayerAction()
+        if playerAction.upper() == 'H':
+          hitAction(deck, player[1])
+        elif playerAction.upper() == 'S':
+          isPlayersTurn = False
+        displayTable(dealer, players)
+
+    else:
+      isPlayersTurn = True
+
+      while isPlayersTurn:
+        isPlayersTurn = gf.basicNpcLogic(deck, player[1])
+      displayTable(dealer, players)
+
+  displayTable(dealer, players)
+
+def dealersPlay(deck, dealer, players):
+  gf.clear_screen()
+
+  isDealersTurn = True
+  while isDealersTurn:
+    isDealersTurn = gf.basicNpcLogic(deck, dealer)
+
+  displayTable(dealer, players)
+
+def displayHandResults(dealer, players):
+  clear_screen()
+  results = determineResults(dealer, players)
+  
+  i = 0
+  for player in players:
+    if results[i] == 0:
+      print(str(i + 1) + ') ' + player[0] + '--> LOSS')
+      i += 1
+    elif results[i] == 1:
+      print(str(i + 1) + ') ' + player[0] + '--> WIN')
+      i += 1
+    elif results[i] == 2:
+      print(str(i + 1) + ') ' + player[0] + '--> PUSH')
+      i += 1
+
 def endThePlay():
   inputString = 'press enter to end the play, and begin the dealers play.'
   input(inputString)
