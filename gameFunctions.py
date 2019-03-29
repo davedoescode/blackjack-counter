@@ -184,15 +184,6 @@ def determineResults(dealer, players):
 
   return results
 
-def isEndOfDeck(deck):
-  continueGame = True
-  if deck[-1] == 'CUT':
-    deck.pop()
-    continueGame = False
-  else:
-    continueGame = True
-  return continueGame
-
 def clear_screen():
 	_ = os.system("clear")
 
