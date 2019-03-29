@@ -15,3 +15,7 @@ class Table():
       elif self.playerHands[j] == 'PLAYER':
         pass
     return self.playerHands
+
+  def clearTable(self):
+    self.dealer = []
+    self.playerHands = [[], [], [], [], [], []]

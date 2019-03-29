@@ -30,3 +30,6 @@ class GameDeck:
 
   def dealCard(self):
     return self.deck.pop()
+
+  def resetDeck(self):
+    self.deck = standardDeck

@@ -26,6 +26,8 @@ def playGame():
   input('press enter to view hand results.')
   displayHandResults(gameTable.dealer, gameTable.playerHands)
   input('press enter to end game.')
+  gameTable.clearTable()
+  gameDeck.resetDeck()
   gf.clear_screen()
   gf.exit()
 
