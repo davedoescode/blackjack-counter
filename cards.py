@@ -42,6 +42,7 @@ class GameDeck:
   def isEndOfDeck(self):
     if self.deck[-1] == 'CUT':
       self.deck.pop()
+      input('last hand of the game, press enter to continue.')
       return True
 
   def resetDeck(self):

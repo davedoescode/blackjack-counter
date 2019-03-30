@@ -70,11 +70,11 @@ def countPlayerTotal(playerHand):
     return str(cardTotal)
 
 def getPlayerAction():
-  playerPrompt = 'enter one of the following options...\n\thit (h)\n\tstay (s)\nplayer selection: '
+  playerPrompt = 'enter one of the following options...\n\thit (a)\n\tstay (s)\nplayer selection: '
   playerAction = input(playerPrompt)
   clear_screen()
 
-  if playerAction.upper() != 'H' and playerAction.upper() != 'S':
+  if playerAction.upper() != 'A' and playerAction.upper() != 'S':
     print('invalid selection, try again.')
     time.sleep(1.25)
     clear_screen()
@@ -120,7 +120,7 @@ def thePlay(deck, dealer, players):
           break
 
         playerAction = getPlayerAction()
-        if playerAction.upper() == 'H':
+        if playerAction.upper() == 'A':
           hitAction(deck, player[1])
         elif playerAction.upper() == 'S':
           isPlayersTurn = False
@@ -150,22 +150,39 @@ def displayHandResults(dealer, players):
   
   i = 0
   for player in players:
-    if results[i] == 0:
-      print(str(i + 1) + ') ' + player[0] + '--> LOSS')
-      i += 1
-    elif results[i] == 1:
-      print(str(i + 1) + ') ' + player[0] + '--> WIN')
-      i += 1
-    elif results[i] == 2:
-      print(str(i + 1) + ') ' + player[0] + '--> PUSH')
-      i += 1
+    if player[0] == 'PLAYER':
+      print('--------------------')
+      if results[i] == 0:
+        print(str(i + 1) + ') ' + player[0] + '--> LOSS')
+        i += 1
+      elif results[i] == 1:
+        print(str(i + 1) + ') ' + player[0] + '--> WIN')
+        i += 1
+      elif results[i] == 2:
+        print(str(i + 1) + ') ' + player[0] + '--> PUSH')
+        i += 1
+      print('--------------------')
+    else:
+      if results[i] == 0:
+        print(str(i + 1) + ') ' + player[0] + '--> LOSS')
+        i += 1
+      elif results[i] == 1:
+        print(str(i + 1) + ') ' + player[0] + '--> WIN')
+        i += 1
+      elif results[i] == 2:
+        print(str(i + 1) + ') ' + player[0] + '--> PUSH')
+        i += 1
 
 def endThePlay():
   inputString = 'press enter to end the play, and begin the dealers play.'
   input(inputString)
 
 def determineResults(dealer, players):
-  dealerScore = countPlayerTotal(dealer)
+  dealerScore = int(countPlayerTotal(dealer))
+  if dealerScore == 'BUST':
+    dealerScore = 0
+  else: 
+    dealerScore = int(dealerScore)
   playerScores = []
   results = []
 
@@ -175,11 +192,11 @@ def determineResults(dealer, players):
   for score in playerScores:
     if score == 'BUST':
       results.append(0)
-    elif score < dealerScore:
+    elif int(score) < dealerScore:
       results.append(0)
-    elif score > dealerScore:
+    elif int(score) > dealerScore:
       results.append(1)
-    elif score == dealerScore:
+    elif int(score) == dealerScore:
       results.append(2)
 
   return results

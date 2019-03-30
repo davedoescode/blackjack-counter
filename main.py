@@ -23,13 +23,13 @@ def playGame():
     gf.endThePlay()
 
     gf.dealersPlay(gameDeck, gameTable.dealer, gameTable.playerHands)
-
-    gameTable.clearTable()
-    print(gameDeck.continueGame)
   
     input('press enter to view hand results.')
     gf.displayHandResults(gameTable.dealer, gameTable.playerHands)
-    
+    input('press enter to continue to the next hand.')
+
+    gameTable.clearTable()
+
   input('press enter to end game.')
   gf.clear_screen()
   gf.exit()
