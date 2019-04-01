@@ -1,4 +1,4 @@
-import cards, table
+import cards, userPlayer, table
 import gameFunctions as gf
 
 def main():
@@ -10,9 +10,11 @@ def playGame():
   gameDeck.shuffleDeck()
   gameDeck.dealerCut()
 
+  player = userPlayer.Player()
+
   gameTable = table.Table()
   playerPosition = gf.getPlayerPosition()
-  gameTable.setPlayerPosition(playerPosition)
+  gameTable.setPlayerPosition(playerPosition, player.playerHand)
   gameTable.fillTablePositions()
 
   while gameDeck.continueGame == True:

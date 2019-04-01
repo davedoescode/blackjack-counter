@@ -3,9 +3,8 @@ class Table():
     self.playerHands = [[], [], [], [], [], []]
     self.dealer = []
 
-  def setPlayerPosition(self, position):
-    self.playerHands[position].append('PLAYER')
-    self.playerHands[position].append([])
+  def setPlayerPosition(self, position, player):
+    self.playerHands[position] = player
 
   def fillTablePositions(self):
     for j in range(0, 6):
