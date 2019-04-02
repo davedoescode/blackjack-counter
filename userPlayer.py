@@ -26,7 +26,8 @@ class Player():
 
     gf.clear_screen()
 
-  def getPlayerBet(self):
+  def getPlayerBet(self, playerChipTotal):
+    gf.clear_screen()
     inputString = 'enter the dollar amount you want to bet this hand, or enter "0" if you want exit: '
     amount = input(inputString)
 
@@ -35,15 +36,17 @@ class Player():
       if  amount < 0:
         print('invalid dollar value, try again.')
         time.sleep(1.25)
-        self.getPlayerBet()
+        self.getPlayerBet(playerChipTotal)
+      elif amount > playerChipTotal:
+        self.bet = playerChipTotal
       elif amount == 0:
-        return amount
+        self.bet = amount
       else:
         self.bet = amount
     except:
       print('invalid dollar value, try again.')
       time.sleep(1.25)
-      self.getPlayerBet()
+      self.getPlayerBet(playerChipTotal)
 
   def determineWinLoss(self, playerCards, dealerCards):
     cardTotal = gf.countPlayerTotal(playerCards)

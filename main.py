@@ -22,10 +22,7 @@ def playGame():
 
   while gameDeck.continueGame == True:
 
-    bet = player.getPlayerBet() # pylint-ignore
-    if bet == 0:
-      gameDeck.continueGame = False
-      break
+    player.getPlayerBet(player.playerHand[2]) # pylint-ignore
 
     gf.theDeal(gameDeck, gameTable.dealer, gameTable.playerHands)
 
