@@ -13,21 +13,31 @@ def playGame():
   player = userPlayer.Player()
 
   gameTable = table.Table()
-  playerPosition = gf.getPlayerPosition()
-  gameTable.setPlayerPosition(playerPosition, player.playerHand)
   gameTable.fillTablePositions()
 
+
+  playerPosition = gf.getPlayerPosition()
+  gameTable.setPlayerPosition(playerPosition, player.playerHand)
+  player.getPlayerTotal()
+
   while gameDeck.continueGame == True:
-    print(gameTable.playerHands)
+
+    bet = player.getPlayerBet() # pylint-ignore
+    if bet == 0:
+      gameDeck.continueGame = False
+      break
+
     gf.theDeal(gameDeck, gameTable.dealer, gameTable.playerHands)
 
     gf.thePlay(gameDeck, gameTable.dealer, gameTable.playerHands)
     gf.endThePlay()
 
     gf.dealersPlay(gameDeck, gameTable.dealer, gameTable.playerHands)
-  
+
+    player.determineWinLoss(player.playerHand[1], gameTable.dealer)
+
     input('press enter to view hand results.')
-    gf.displayHandResults(gameTable.dealer, gameTable.playerHands)
+    gf.displayHandResults(gameTable.dealer, gameTable.playerHands, player.playerHand[2], player.playerPlusMinus)
     input('press enter to continue to the next hand.')
 
     gameTable.clearTable()

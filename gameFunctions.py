@@ -31,11 +31,17 @@ def displayTable(dealer, players):
     else:
       dealerCards += (card + ', ')
 
-  print('---------------')
+  print('--------------------')
   print('Dealer:\n' + dealerCards + '\n--> ' + countPlayerTotal(dealer) + ' <--')
-  print('---------------')
+  print('--------------------')
+
+  playerTotal = 0
 
   for player in players:
+
+    if player[0] == 'PLAYER':
+      playerTotal = player[2]
+      
     print(player[0] + ':')
     playerCards = ''
     for card in player[1]:
@@ -45,7 +51,10 @@ def displayTable(dealer, players):
         playerCards += (card + ', ')
     print(playerCards)
     print('--> ' + countPlayerTotal(player[1]) + ' <--')
-    print('---------------')
+    print('--------------------')
+  
+  print('PLAYER TOTAL = ' + str(playerTotal))
+  print('=========================')
 
 def countPlayerTotal(playerHand):
   #TODO: IMPROVE LOGIC IF THE CARD IS AN ACE, MAY BE IN A DIFFERENT FUNCTION
@@ -144,14 +153,14 @@ def dealersPlay(deck, dealer, players):
 
   displayTable(dealer, players)
 
-def displayHandResults(dealer, players):
+def displayHandResults(dealer, players, playerTotal, playerPM):
   clear_screen()
   results = determineResults(dealer, players)
   
   i = 0
   for player in players:
     if player[0] == 'PLAYER':
-      print('--------------------')
+      print('-------------------------')
       if results[i] == 0:
         print(str(i + 1) + ') ' + player[0] + '--> LOSS')
         i += 1
@@ -161,7 +170,7 @@ def displayHandResults(dealer, players):
       elif results[i] == 2:
         print(str(i + 1) + ') ' + player[0] + '--> PUSH')
         i += 1
-      print('--------------------')
+      print('-------------------------')
     else:
       if results[i] == 0:
         print(str(i + 1) + ') ' + player[0] + '--> LOSS')
@@ -172,6 +181,10 @@ def displayHandResults(dealer, players):
       elif results[i] == 2:
         print(str(i + 1) + ') ' + player[0] + '--> PUSH')
         i += 1
+  print('-------------------------')
+  print('PLAYER TOTAL = ' + str(playerTotal))
+  print('+/- = ' + str(playerPM))
+  print('=========================')
 
 def endThePlay():
   inputString = 'press enter to end the play, and begin the dealers play.'

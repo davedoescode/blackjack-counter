@@ -1,9 +1,9 @@
 import time
+import gameFunctions as gf
 
 class Player():
   def __init__(self):
-    self.playerHand = ['PLAYER', []]
-    self.playerTotal = 0
+    self.playerHand = ['PLAYER', [], 0]
     self.playerPlusMinus = 0
     self.bet = 0
 
@@ -11,23 +11,63 @@ class Player():
     inputString = 'enter the dollar amount you want to start with: '
     amount = input(inputString)
 
-    if type(amount) != int and amount <= 0:
+    try:
+      amount = int(amount)
+      if amount < 0:
+        print('invalid dollar value, try again.')
+        time.sleep(1.25)
+        self.getPlayerTotal()
+      else:
+        self.playerHand[2] = amount
+    except:
       print('invalid dollar value, try again.')
       time.sleep(1.25)
       self.getPlayerTotal()
-    else:
-      self.playerTotal = amount
+
+    gf.clear_screen()
 
   def getPlayerBet(self):
-    inputString = 'enter the dollar amount you want to bet this hand: '
+    inputString = 'enter the dollar amount you want to bet this hand, or enter "0" if you want exit: '
     amount = input(inputString)
 
-    if type(amount) != int and amount <= 0:
+    try:
+      amount = int(amount)
+      if  amount < 0:
+        print('invalid dollar value, try again.')
+        time.sleep(1.25)
+        self.getPlayerBet()
+      elif amount == 0:
+        return amount
+      else:
+        self.bet = amount
+    except:
       print('invalid dollar value, try again.')
       time.sleep(1.25)
-      self.getPlayerTotal()
-    else:
-      self.bet = amount
+      self.getPlayerBet()
+
+  def determineWinLoss(self, playerCards, dealerCards):
+    cardTotal = gf.countPlayerTotal(playerCards)
+    dealerTotal = gf.countPlayerTotal(dealerCards)
+
+    if cardTotal == 'BUST':
+      cardTotal = 0
+    if dealerTotal == 'BUST':
+      dealerTotal = 0
+
+    if cardTotal > dealerTotal:
+      if cardTotal == 21:
+        self.playerHand[2] += self.bet * 1.5
+        self.playerPlusMinus += self.bet * 1.5
+      else:
+        self.playerHand[2] += self.bet
+        self.playerPlusMinus += self.bet
+    elif cardTotal < dealerTotal:
+      self.playerHand[2] -= self.bet
+      self.playerPlusMinus -= self.bet
+    elif cardTotal == dealerTotal:
+      pass
+
+    self.clearPlayerBet()
 
   def clearPlayerBet(self):
     self.bet = 0
