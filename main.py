@@ -40,6 +40,8 @@ def playGame():
     gf.displayHandResults(gameTable.dealer, gameTable.playerHands, player.playerHand[2], player.playerPlusMinus)
     input('press enter to continue to the next hand.')
 
+    gameDeck.continueGame = player.isBroke()
+
     gameTable.clearTable()
 
   input('press enter to end game.')

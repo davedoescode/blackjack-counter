@@ -191,7 +191,7 @@ def endThePlay():
   input(inputString)
 
 def determineResults(dealer, players):
-  dealerScore = int(countPlayerTotal(dealer))
+  dealerScore = countPlayerTotal(dealer)
   if dealerScore == 'BUST':
     dealerScore = 0
   else: 
@@ -213,6 +213,18 @@ def determineResults(dealer, players):
       results.append(2)
 
   return results
+
+def playerIsBroke():
+  clear_screen()
+  
+  i = 0
+  while i < 10:
+    print(' --- GAME OVER ---')
+    time.sleep(0.2)
+    clear_screen()
+    time.sleep(0.2)
+    i += 1
+  return False
 
 def clear_screen():
 	_ = os.system("clear")
