@@ -40,7 +40,7 @@ class Player():
       elif amount > playerChipTotal:
         self.bet = playerChipTotal
       elif amount == 0:
-        self.bet = amount
+        return amount
       else:
         self.bet = amount
     except:
