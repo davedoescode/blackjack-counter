@@ -6,21 +6,15 @@ def getPlayerPosition():
 
   try:
     playerPosition = int(input(playerPrompt)) - 1
+    if playerPosition >= 0 and playerPosition <= 5:
+      clear_screen()
+      return playerPosition
   except:
     print('invalid postion selection, try again ...')
     time.sleep(1.25)
     clear_screen()
-    getPlayerPosition()
-
-  if playerPosition >= 0 and playerPosition <= 5:
-    clear_screen()
+    playerPosition = getPlayerPosition()
     return playerPosition
-  else:
-    clear_screen()
-    print('invalid postion selection, try again ...')
-    time.sleep(1.25)
-    clear_screen()
-    getPlayerPosition()
 
 def displayTable(dealer, players):
   clear_screen()
