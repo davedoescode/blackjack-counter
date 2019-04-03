@@ -73,6 +73,30 @@ class Player():
 
     self.clearPlayerBet()
 
+  def getWinLossStat(self, playerCards, dealerCards, playerTotalChips):
+    cardTotal = gf.countPlayerTotal(playerCards)
+    dealerTotal = gf.countPlayerTotal(dealerCards)
+
+    if cardTotal == 'BUST':
+      stat = (0, self.bet, playerTotalChips)
+      return stat
+    elif dealerTotal == 'BUST':
+      stat = (1, self.bet, playerTotalChips)
+      return stat
+    elif cardTotal > dealerTotal:
+      if cardTotal == 21:
+        stat = (1, self.bet * 1.5, playerTotalChips)
+        return stat
+      else:
+        stat = (1, self.bet, playerTotalChips)
+        return stat
+    elif cardTotal < dealerTotal:
+      stat = (0, self.bet, playerTotalChips)
+      return stat
+    elif cardTotal == dealerTotal:
+      stat = (-1, 0, playerTotalChips)
+      return stat
+
   def isBroke(self):
     if self.playerHand[2] <= 0:
       return gf.playerIsBroke()

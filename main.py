@@ -1,5 +1,6 @@
-import cards, userPlayer, table
+import cards, userPlayer, table, statTracker
 import gameFunctions as gf
+import statFunctions as sf
 
 def main():
   gf.clear_screen()
@@ -22,6 +23,8 @@ def playGame():
   gameTable.setPlayerPosition(playerPosition, player.playerHand)
   player.getPlayerTotal()
 
+  winLossTracker = statTracker.WinLoss()
+
   while gameDeck.continueGame == True:
 
     bet = player.getPlayerBet(player.playerHand[2]) # pylint-ignore
@@ -38,6 +41,8 @@ def playGame():
 
     player.determineWinLoss(player.playerHand[1], gameTable.dealer)
 
+    winLossTracker.addWinOrLoss(player.getWinLossStat(player.playerHand[1], gameTable.dealer, player.playerHand[2]))
+
     input('press enter to view hand results.')
     gf.displayHandResults(gameTable.dealer, gameTable.playerHands, player.playerHand[2], player.playerPlusMinus)
     input('press enter to continue to the next hand.')
@@ -48,6 +53,8 @@ def playGame():
 
     gameTable.clearTable()
 
+  winLossStat = winLossTracker.winLoss
+  sf.plotWinLoss(winLossStat)
   input('press enter to end game.')
   gf.clear_screen()
   gf.exit()
