@@ -6,6 +6,8 @@ def main():
   playGame()
 
 def playGame():
+  hardBreak = True
+
   gameDeck = cards.GameDeck()
   gameDeck.shuffleDeck()
   gameDeck.dealerCut()
@@ -40,7 +42,9 @@ def playGame():
     gf.displayHandResults(gameTable.dealer, gameTable.playerHands, player.playerHand[2], player.playerPlusMinus)
     input('press enter to continue to the next hand.')
 
-    gameDeck.continueGame = player.isBroke()
+    hardBreak = player.isBroke()
+    if hardBreak == False:
+      gameDeck.continueGame = False
 
     gameTable.clearTable()
 
